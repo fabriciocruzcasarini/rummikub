@@ -1,0 +1,6 @@
+{
+  "name": "Rummikub 3D Online",
+  "description": "Jogo de Rummikub em 3D para 3 jogadores online e contra bots inteligentes com regras completas e física tátil.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
