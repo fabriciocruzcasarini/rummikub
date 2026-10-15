@@ -9,6 +9,12 @@
     <meta property="og:description" content="Jogo de Rummikub em 3D para 3 jogadores online e contra bots inteligentes com regras completas e física tátil." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Garante que o acesso via Alias /rummikub tenha a barra final /rummikub/ para caminhos relativos
+      if (location.pathname === '/rummikub') {
+        location.replace('/rummikub/' + location.search + location.hash);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,9 +1,29 @@
+# Configuração Apache para Alias /rummikub
+<IfModule mod_dir.c>
+  DirectoryIndex index.html
+  DirectorySlash On
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /rummikub/
+
+  # Forçar barra no final caso seja acessado /rummikub sem barra final
+  RewriteCond %{REQUEST_URI} ^/rummikub$
+  RewriteRule ^(.*)$ /rummikub/ [R=301,L]
+
+  # Se o arquivo ou diretório físico existir (ex: assets/*.js, css, imagens), serve diretamente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d [OR]
+  RewriteCond %{REQUEST_FILENAME} -l
+  RewriteRule ^ - [L]
+
+  # Redireciona todas as demais rotas para index.html (SPA)
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
   RewriteRule . /rummikub/index.html [L]
+</IfModule>
+
+# Fallback para Apache 2.4+ se mod_rewrite não estiver ativo
+<IfModule mod_dir.c>
+  FallbackResource /rummikub/index.html
 </IfModule>
